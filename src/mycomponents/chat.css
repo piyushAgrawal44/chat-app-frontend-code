@@ -4,28 +4,17 @@
     box-sizing: border-box;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-body{
+
+.body{
     max-width: 1300px;
     margin: auto;
     border: 0px;
-}
-.message{
-    background-color: aquamarine;
-    border: 1px solid black;
-    margin-bottom: 5px;
-    padding: 3px;
-}
-.left{
-    float: left;
-    clear: both;
-}
-.right{
-    float: right;
-    clear: both;
+   
 }
 .box{
+   
     padding: 10px;
-    height: 300px;
+    height: 400px;
     max-width: 600px;
     margin: auto;
     overflow: auto;
@@ -34,13 +23,15 @@ body{
     border: 3px solid black;
 }
 #send-container{
-    width: 100%;
+    padding: 10px;
+  
+    max-width: 600px;
     margin: auto;
-   
 }
 #messageInput{
     display: inline;
     height: 40px;
+    border: 2px solid black;
     overflow: auto;
 }
 .send-button{

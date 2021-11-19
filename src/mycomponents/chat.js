@@ -8,17 +8,22 @@ import ReactScrollToBottom from "react-scroll-to-bottom";
 
 let socket;
 
-const ENDPOINT = "https://u-c-app.herokuapp.com/"
+// const ENDPOINT = "https://u-c-app.herokuapp.com/"
+const ENDPOINT = "https://my-u-c-server.herokuapp.com/"
 
 export default function Chat() {
    
    const [id, setid] = useState("");
    const [messages, setmessages] = useState([]);
+  
 
     let send=()=>{
-       const message=document.getElementById('messageInput').value;
-        socket.emit('processing-message', {message, id});
-        document.getElementById('messageInput').value="";
+        const message=document.getElementById('messageInput').value;
+        if (message!=="") {
+            socket.emit('processing-message', {message, id});
+            document.getElementById('messageInput').value="";
+        }
+        
     };
 
     useEffect(() => {
@@ -26,28 +31,37 @@ export default function Chat() {
 
         socket.on('connect', () => {
             setid(socket.id); 
-        })
-        
-        socket.emit('user-joined',{ userName });
-
-        socket.on('welcome',(data)=>{
-            setmessages([...messages,data]);
         });
+        socket.emit('user-joined',{ userName});
 
-        socket.on('sendall', (data)=>{
-            setmessages([...messages,data]);
-        });
-
-        socket.on('leave', (data)=>{
-            setmessages([...messages,data]);
-        });
-       
         return () => {
-           socket.emit('disconnected');
+         
            socket.off();
         }
     }, []);
 
+    useEffect(() => {
+        
+        socket.on('welcome',(data)=>{
+            setmessages([...messages,data]); 
+        });
+        return () => {
+           socket.off();
+        }
+    }, [messages]);
+    
+    useEffect(() => {
+
+        socket.on('sendall',(data)=>{
+            setmessages([...messages,data]);
+           
+        });
+        return () => {
+           socket.off();
+        }
+    }, [messages]);
+ 
+    
     useEffect(() => {
         socket.on('send-message', (data)=>{
             setmessages([...messages,data]);
@@ -55,23 +69,38 @@ export default function Chat() {
         return () => {
            socket.off();
         }
-    }, [messages])
+    }, [messages]);
+
+    
+    useEffect(() => {
+        
+        socket.on('leave',(data)=>{
+            setmessages([...messages,data]);
+        });
+        return () => {
+           socket.off();
+        }
+    }, [messages]);
 
     return (
-        <div id='welcome'>
+    <div className="body">
+        <div className="innercontainer">
             <h1 className="text-center">Welcome</h1>
 
             <ReactScrollToBottom className="box" id="box">
-             { messages.map((content,i)=>< Message user={content.id===id?"":content.user}  message={content.message} side={content.id===id?"right":"left"} />)}
+             { messages.map((content,i)=>< Message key={i} user={content.id===id?"":content.user}  message={content.message} side={content.id===id?"right":"left"} />)}
             </ReactScrollToBottom>
 
             <div className="send ">
                 <div className="text-center " action="#" id="send-container">
-                    <input type="text" className="messageInput" id="messageInput" />
-                    <button className="btn btn-primary send-button" id="send-button" onClick={send} type="button">Send</button>
+                    <input onKeyPress={(event) => event.key === 'Enter'? send():null} type="text" className="messageInput" id="messageInput" />
+                    <button className="btn btn-primary send-button" id="send-button" onClick={send} type="button">Send
+                    </button>
                 </div>
             </div>
         </div>
+        </div>
+      
     )
 
 }

@@ -11,9 +11,8 @@ import {
 function App() {
  
   return (
-    <>
+  
       <Router>
-      
         <Routes>
           <Route exact path="/unique-chat" element={<Home/>}/>
           <Route exact path="/unique-chat/" element={<Home/>}/>
@@ -21,10 +20,9 @@ function App() {
           <Route exact path="/chat" element={<Chat/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
-     
     </Router>
      
-    </>
+  
   );
 }
 
