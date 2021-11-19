@@ -15,6 +15,7 @@ function App() {
       <Router>
       
         <Routes>
+        <Route exact path="/unique-chat" element={<Home/>}/>
           <Route exact path="/" element={<Home/>}/>
           <Route exact path="/chat" element={<Chat/>}/>
           <Route path="*" element={<NotFound/>}/>
