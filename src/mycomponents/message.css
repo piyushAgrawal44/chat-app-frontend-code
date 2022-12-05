@@ -11,12 +11,12 @@
     margin-bottom: 10px;
 }
 .left{
-    background-color: yellow;
+    background-color: #C7FCEC;
     float: left;
     clear: both;
 }
 .right{
-    background-color: red;
+    background-color: #E7FEF7;
     float: right;
     clear: both;
 }

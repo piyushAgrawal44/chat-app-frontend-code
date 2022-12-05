@@ -2,8 +2,6 @@ import React from 'react'
 
 export default function notfound() {
     return (
-        <div>
-            not found
-        </div>
+        <h5 className='text-center text-warning'>URL Not Found</h5>
     )
 }

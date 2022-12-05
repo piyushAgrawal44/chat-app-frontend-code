@@ -9,32 +9,33 @@
     max-width: 1300px;
     margin: auto;
     border: 0px;
+    background-color: white;
    
 }
 .box{
    
     padding: 10px;
-    height: 400px;
-    max-width: 600px;
+    min-height: 300px;
+    max-height: 600px;
+    max-width: 700px;
     margin: auto;
-    overflow: auto;
-    margin-top: 50px;
-    background-color: light;
-    border: 3px solid black;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('../assets/chatbg.jpg');
+        
 }
 #send-container{
-    padding: 10px;
-  
-    max-width: 600px;
+    max-width: 700px;
     margin: auto;
-}
-#messageInput{
-    display: inline;
-    height: 40px;
-    border: 2px solid black;
-    overflow: auto;
+    margin-top: 10px;
+    display: flex;
 }
 .send-button{
-    display: inline;
-    margin-left: 5px;
+   
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: #C7FCEC;
+    color: black;
+    font-weight: 600;
+    border: 1px solid black;
 }
